@@ -1,43 +1,24 @@
 import React from 'react';
 import firebase from './firebase.js';
 
-const ImageList = (props) => {
-    console.log(props);
-
-    let items = props.items.map((item) => {
-        return (
-            <ImageListItem key={item.id} />
-        )
-    });
-    return (
-        <ul className="edit-form-list">
-            {items}
-        </ul>
-    );
-};
-
 class ImageListItem extends React.Component {
     constructor(props) {
         super(props);
-        this.handleClick.bind(this);
-    }
-    handleClick() {
-        let index = parseInt(this.props.index);
-        this.props.openCloseForm(index);
+        this.state = { open: false };
     }
     removeFromList() {
-        let id = parseInt(this.props.id);
-        this.props.removeItem(id);
+        const itemRef = firebase.database().ref(`/items/${this.props.item.id}`);
+        itemRef.remove();
     }
     render () {
         return (
             <li className="edit-form-list-item">
-                <h3>{this.props.title}</h3>
-                <button onClick={this.handleClick}>Remove</button>
-                <section style={{display: this.props.item.formOpen === true ? 'block' : 'none'}}>
+                <h3>{this.props.item.title}</h3>
+                <button onClick={() => this.setState({open: true})}>Remove</button>
+                <section style={{display: this.state.open === true ? 'block' : 'none'}} className="edit-remove-form">
                     <label>Are you sure?</label>
-                    <button onClick={() => this.removeFromList(this.props.item.id)}>Remove</button>
-                    <button onClick={this.handleClick}>Cancel</button>
+                    <button onClick={() => this.removeFromList()}>Remove</button>
+                    <button onClick={() => this.setState({open: false})}>Cancel</button>
                 </section>
             </li>
         )
@@ -45,10 +26,8 @@ class ImageListItem extends React.Component {
 }
 
 class EditRemoveList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.openCloseForm = this.openCloseForm.bind(this);
-    this.removeItem = this.removeItem.bind(this);
+  constructor() {
+    super();
     this.state = { items: [] };
   }
   componentDidMount() {
@@ -62,8 +41,7 @@ class EditRemoveList extends React.Component {
                   image: items[item].image,
                   title: items[item].title,
                   filter: items[item].filter,
-                  date: items[item].date,
-                  formOpen: false
+                  date: items[item].date
               });
           }
           this.setState({
@@ -71,18 +49,17 @@ class EditRemoveList extends React.Component {
           });
       });
     };
-    openCloseForm(index) {
-        this.items[index].formOpen = !this.items[index].formOpen;
-        this.setState({items: this.items});
-    };
-    removeItem(itemId) {
-        const itemRef = firebase.database().ref(`/items/${itemId}`);
-        itemRef.remove();
-    };
   render() {
-    return (
-        <ImageList items={this.state.items} openCloseForm={this.openCloseForm} removeItem={this.removeItem} />
-    );
+      let items = this.state.items.map((item) => {
+          return (
+              <ImageListItem key={item.id} item={item} removeItem={this.removeItem} />
+          )
+      });
+      return (
+          <ul className="edit-form-list">
+              {items}
+          </ul>
+      );
   }
 }
 export default EditRemoveList;

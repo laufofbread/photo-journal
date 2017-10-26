@@ -13,16 +13,15 @@ class UploadForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
-
   handleSubmit(e) {
     e.preventDefault();
     const itemsRef = firebase.database().ref('items');
+    const storageRef = firebase.storage().ref(this.state.image);
     const item = {
         image: this.state.image,
         title: this.state.title,
@@ -30,6 +29,7 @@ class UploadForm extends React.Component {
         date: this.state.date
     };
     itemsRef.push(item);
+      storageRef.put(this.state.image);
     this.setState({
         image: "",
         title: "",
@@ -37,7 +37,6 @@ class UploadForm extends React.Component {
         date: new Date().getTime()
     });
   }
-
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
