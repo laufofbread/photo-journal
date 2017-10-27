@@ -7,8 +7,12 @@ class ImageListItem extends React.Component {
         this.state = { open: false };
     }
     removeFromList() {
-        const itemRef = firebase.database().ref(`/items/${this.props.item.id}`);
-        itemRef.remove();
+      const itemRef = firebase.database().ref(`/items/${this.props.item.id}`);
+      const storageRef = firebase.storage().ref();
+      let imageRef = storageRef.child(`images/${this.props.item.image}`);
+
+      itemRef.remove();
+      imageRef.delete();
     }
     render () {
         return (

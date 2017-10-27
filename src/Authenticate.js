@@ -7,7 +7,7 @@ class Authenticate extends React.Component {
   constructor() {
     super();
     this.state = {
-        user: null
+      user: null
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -39,15 +39,15 @@ class Authenticate extends React.Component {
   render() {
     let button = this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>;
     return (
-      <section>
+      <main>
         {button}
         {this.state.user ?
-          <div>
+          <section>
             <UploadForm/>
             <EditRemoveList/>
-          </div>
+          </section>
         : ""}
-      </section>
+      </main>
     );
   }
 }
