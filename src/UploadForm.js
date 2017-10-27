@@ -8,34 +8,41 @@ class UploadForm extends React.Component {
       image: "",
       title: "",
       filter: "",
-      date: new Date().getTime()
+      date: "",
+        file: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+      if(e.target.name === "image") {this.state.file = e.target.files[0];}
+      this.setState({[e.target.name]: e.target.value});
   }
   handleSubmit(e) {
     e.preventDefault();
-    const itemsRef = firebase.database().ref('items');
-    const storageRef = firebase.storage().ref(this.state.image);
-    const item = {
-        image: this.state.image,
-        title: this.state.title,
-        filter: this.state.filter,
-        date: this.state.date
-    };
-    itemsRef.push(item);
-      storageRef.put(this.state.image);
+    this.submitDatabaseItem();
+    this.submitImage();
     this.setState({
         image: "",
         title: "",
         filter: "",
-        date: new Date().getTime()
+        date: "",
+        file: ""
     });
+  }
+  submitDatabaseItem() {
+      const itemsRef = firebase.database().ref('items');
+      const item = {
+          image: this.state.image,
+          title: this.state.title,
+          filter: this.state.filter,
+          date: new Date().getTime()
+      };
+      itemsRef.push(item);
+  }
+  submitImage() {
+      const storageRef = firebase.storage().ref(this.state.image);
+      storageRef.put(this.state.file);
   }
   render() {
     return (
