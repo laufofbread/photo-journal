@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from './firebase.js';
+import firebase, { auth, provider } from './firebase.js';
 
 class UploadForm extends React.Component {
   constructor() {
@@ -9,7 +9,7 @@ class UploadForm extends React.Component {
       title: "",
       filter: "",
       date: "",
-        file: ""
+      file: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +41,7 @@ class UploadForm extends React.Component {
       itemsRef.push(item);
   }
   submitImage() {
-      const storageRef = firebase.storage().ref(this.state.image);
+      const storageRef = firebase.storage().ref(this.state.image.name);
       storageRef.put(this.state.file);
   }
   render() {

@@ -1,14 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UploadForm from './UploadForm';
-import EditRemoveList from './EditRemove';
+import Authenticate from './Authenticate';
 
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    <section>
-      <UploadForm/>
-      <EditRemoveList/>
-    </section>,
+    <Authenticate />,
     document.getElementById('mount')
   );
 });

@@ -31,24 +31,24 @@ class EditRemoveList extends React.Component {
     this.state = { items: [] };
   }
   componentDidMount() {
-      const itemsRef = firebase.database().ref('items');
-      itemsRef.on('value', (snapshot) => {
-          let items = snapshot.val();
-          let newState = [];
-          for (let item in items) {
-              newState.push({
-                  id: item,
-                  image: items[item].image,
-                  title: items[item].title,
-                  filter: items[item].filter,
-                  date: items[item].date
-              });
-          }
-          this.setState({
-              items: newState
-          });
+    const itemsRef = firebase.database().ref('items');
+    itemsRef.on('value', (snapshot) => {
+      let items = snapshot.val();
+      let newState = [];
+      for (let item in items) {
+        newState.push({
+          id: item,
+          image: items[item].image,
+          title: items[item].title,
+          filter: items[item].filter,
+          date: items[item].date
+        });
+      }
+      this.setState({
+        items: newState
       });
-    };
+    });
+  };
   render() {
       let items = this.state.items.map((item) => {
           return (
