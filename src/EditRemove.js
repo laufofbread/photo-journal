@@ -17,12 +17,14 @@ class ImageListItem extends React.Component {
     render () {
         return (
             <li className="edit-form-list-item">
-                <h3>{this.props.item.title}</h3>
-                <button onClick={() => this.setState({open: true})}>Remove</button>
-                <section style={{display: this.state.open === true ? 'block' : 'none'}} className="edit-remove-form">
+                <h3 className="edit-form-title">
+                  {this.props.item.title}
+                  <button className="btn" onClick={() => this.setState({open: true})}>Remove</button>
+                </h3>
+                <section className="edit-remove-form" style={{display: this.state.open === true ? 'block' : 'none'}}>
                     <label>Are you sure?</label>
-                    <button onClick={() => this.removeFromList()}>Remove</button>
-                    <button onClick={() => this.setState({open: false})}>Cancel</button>
+                    <button className="btn" onClick={() => this.setState({open: false})}>No, cancel</button>
+                    <button className="btn btn-primary" onClick={() => this.removeFromList()}>Yes, remove it</button>
                 </section>
             </li>
         )

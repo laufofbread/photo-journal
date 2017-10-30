@@ -52,7 +52,7 @@ img {
 
 .upload-form-wrapper {
   clear: both;
-  margin-top: .5rem;
+  padding-top: .5rem;
 }
 
 .upload-form {
@@ -80,5 +80,31 @@ img {
     width:  100%;
     font-size:  1.2rem;
     padding:  .7rem;
+  }
+}
+
+.edit-form-list-item {
+  border-bottom:  1px dotted $jumbo;
+}
+
+.edit-form-title {
+  display: flex;
+  align-items: center;
+  font-weight:  normal;
+
+  .btn  {
+    margin-left:  auto;
+  }
+}
+
+.edit-remove-form {
+  margin: .5rem;
+
+  label {
+    display: block;
+  }
+
+  .btn {
+    margin: .5rem .5rem 0 0;
   }
 }
