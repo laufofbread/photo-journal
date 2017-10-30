@@ -19,10 +19,10 @@ class GalleryItem extends React.Component {
   render () {
     let date = format(new Date(this.props.item.date), "Do MMMM YYYY");
     return (
-      <li className="gallery-item">
+      <figure className="gallery-item">
         <img src={this.state.src} />
-        <figcaption>{this.props.item.title}, {this.props.item.filter} - {date}</figcaption>
-      </li>
+        <figcaption className="caption">{this.props.item.title}, {this.props.item.filter} - {date}</figcaption>
+      </figure>
     )
   }
 }
@@ -61,9 +61,9 @@ class Gallery extends React.Component {
       )
     });
     return (
-      <ul className="gallery">
+      <section className="gallery">
         {items}
-      </ul>
+      </section>
     )
   }
 }

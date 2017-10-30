@@ -7,11 +7,6 @@ ul {
   padding: 0;
 }
 
-.gallery-item {
-  width:  100px;
-  float: left;
-}
-
 img {
   width:  100%;
   height: auto;
@@ -107,4 +102,21 @@ img {
   .btn {
     margin: .5rem .5rem 0 0;
   }
+}
+
+.gallery {
+  padding: 1rem;
+}
+
+.gallery-item {
+  width: 100%;
+  margin: 4rem 0;
+}
+
+.caption {
+  text-align: right;
+  font-size: .9rem;
+  color: $salt-box;
+  font-style: italic;
+  margin: .2rem;
 }
