@@ -4,6 +4,7 @@ import {
   HashRouter as Router,
   Route
 } from 'react-router-dom'
+
 import Authenticate from './Authenticate';
 import Gallery from './Gallery';
 

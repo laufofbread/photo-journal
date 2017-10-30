@@ -1,5 +1,31 @@
 import React from 'react';
 import firebase, { auth, provider } from './firebase.js';
+import {format} from 'date-fns';
+
+class GalleryItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      src: ""
+    };
+  }
+  componentDidMount() {
+    const storageRef = firebase.storage().ref(`images/${this.props.item.image}`);
+
+    storageRef.getDownloadURL().then((url) => {
+      this.setState({src: url});
+    });
+  }
+  render () {
+    let date = format(new Date(this.props.item.date), "Do MMMM YYYY");
+    return (
+      <li className="gallery-item">
+        <img src={this.state.src} />
+        <figcaption>{this.props.item.title} - {date}</figcaption>
+      </li>
+    )
+  }
+}
 
 class Gallery extends React.Component {
   constructor() {
@@ -7,7 +33,6 @@ class Gallery extends React.Component {
     this.state = {
       items: []
     };
-    this.getImage = this.getImage.bind(this);
   }
   componentDidMount() {
     const itemsRef = firebase.database().ref('items');
@@ -20,8 +45,7 @@ class Gallery extends React.Component {
           image: items[item].image,
           title: items[item].title,
           filter: items[item].filter,
-          date: items[item].date,
-          url: ""
+          date: items[item].date
         });
       }
       this.setState({
@@ -29,26 +53,15 @@ class Gallery extends React.Component {
       });
     });
   };
-  getImage(image) {
-    const storageRef = firebase.storage().ref(`images/${image}`);
 
-    storageRef.getDownloadURL().then((url) => {
-      return url;
-    });
-  }
   render () {
     let items = this.state.items.map((item) => {
-      let src = this.getImage(item.image);
-      console.log(item);
       return (
-        <li key={item.id}>
-          <img src={src} />
-          <figcaption>{item.title - new Date(item.date)}</figcaption>
-        </li>
+        <GalleryItem key={item.id} item={item} />
       )
     });
     return (
-      <ul>
+      <ul className="gallery">
         {items}
       </ul>
     )
