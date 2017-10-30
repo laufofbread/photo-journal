@@ -48,17 +48,17 @@ class UploadForm extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Image</label>
-        <input type="file" name="image" value={this.state.image} onChange={this.handleChange} />
+      <form className="upload-form" onSubmit={this.handleSubmit}>
+        <label>Choose image:</label>
+        <input type="file" name="image" value={this.state.image} onChange={this.handleChange} required />
 
-        <label>Title</label>
-        <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+        <label>Title:</label>
+        <input type="text" name="title" value={this.state.title} onChange={this.handleChange} required />
 
-        <label>Filter</label>
-        <input type="text" name="filter" value={this.state.filter} onChange={this.handleChange} />
+        <label>Filter:</label>
+        <input type="text" name="filter" value={this.state.filter} onChange={this.handleChange} required />
 
-        <button type="submit">Upload</button>
+        <button type="submit" className="btn btn-primary">Upload</button>
       </form>
     );
   }

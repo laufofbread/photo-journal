@@ -37,12 +37,13 @@ class Authenticate extends React.Component {
       });
   }
   render() {
-    let button = this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>;
+    let button = this.state.user ? <button className="btn logout-btn" onClick={this.logout}>Log out</button>
+      : <button className="btn" onClick={this.login}>Log in</button>;
     return (
-      <main>
+      <main className="authentication-main">
         {button}
         {this.state.user ?
-          <section>
+          <section className="upload-form-wrapper">
             <UploadForm/>
             <EditRemoveList/>
           </section>

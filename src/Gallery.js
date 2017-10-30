@@ -21,7 +21,7 @@ class GalleryItem extends React.Component {
     return (
       <li className="gallery-item">
         <img src={this.state.src} />
-        <figcaption>{this.props.item.title} - {date}</figcaption>
+        <figcaption>{this.props.item.title}, {this.props.item.filter} - {date}</figcaption>
       </li>
     )
   }
