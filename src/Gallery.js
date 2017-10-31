@@ -20,7 +20,9 @@ class GalleryItem extends React.Component {
     let date = format(new Date(this.props.item.date), "Do MMMM YYYY");
     return (
       <figure className="gallery-item">
-        <img src={this.state.src} />
+        <div className="gallery-image-holder">
+          <img src={this.state.src} />
+        </div>
         <figcaption className="caption">{this.props.item.title}, {this.props.item.filter} - {date}</figcaption>
       </figure>
     )
@@ -31,7 +33,8 @@ class Gallery extends React.Component {
   constructor() {
     super();
     this.state = {
-      items: []
+      items: [],
+      view: "full-view"
     };
   }
   componentDidMount() {
@@ -61,9 +64,13 @@ class Gallery extends React.Component {
       )
     });
     return (
-      <section className="gallery">
-        {items}
-      </section>
+      <main>
+        <button onClick={() => this.setState({ view: "grid-view"})} className="btn btn-primary">Grid view</button>
+        <button onClick={() => this.setState({ view: "full-view"})} className="btn btn-primary">Full view</button>
+        <section className={"gallery "+ this.state.view}>
+          {items}
+        </section>
+      </main>
     )
   }
 }
