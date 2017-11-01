@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import firebase, { auth, provider } from './firebase.js';
 import {format} from 'date-fns';
 
@@ -9,10 +10,10 @@ class GalleryItem extends React.Component {
       src: "",
       loading: true
     };
+    this.clickItem = this.clickItem.bind(this);
   }
   componentDidMount() {
     const storageRef = firebase.storage().ref(`images/${this.props.item.image}`);
-
     storageRef.getDownloadURL().then((url) => {
       this.setState({src: url});
     });
@@ -20,10 +21,20 @@ class GalleryItem extends React.Component {
   handleImageLoaded() {
     this.setState({ loading: false });
   }
+  clickItem() {
+    this.props.clickItem();
+    //
+    // let offset = ReactDOM.findDOMNode(this.refs[this.props.item.id]).getBoundingClientRect().y;
+    // console.log(ReactDOM.findDOMNode(this.refs[this.props.item.id]).getBoundingClientRect());
+    // document.body.scrollTo(0, offset);
+    location.href = "#"+ this.props.item.id;
+  }
   render () {
     let date = format(new Date(this.props.item.date), "Do MMMM YYYY");
     return (
-      <figure className="gallery-item">
+      <figure onClick={this.clickItem}
+              id={this.props.item.id}
+              className="gallery-item">
         <div className={this.state.loading ? "gallery-image-holder loading" : "gallery-image-holder"}>
           <img className={this.state.loading ? "loading" : ""}
                onLoad={this.handleImageLoaded.bind(this)}
@@ -42,6 +53,7 @@ class Gallery extends React.Component {
       items: [],
       grid: true
     };
+    this.clickItem = this.clickItem.bind(this);
   }
   componentDidMount() {
     const itemsRef = firebase.database().ref('items');
@@ -62,15 +74,19 @@ class Gallery extends React.Component {
       });
     });
   };
-
+  clickItem() {
+    this.setState({ grid: false });
+  }
   render () {
     let items = this.state.items.map((item) => {
       return (
-        <GalleryItem key={item.id} item={item} />
+        <GalleryItem key={item.id}
+                     item={item}
+                     clickItem={this.clickItem} />
       )
     });
     return (
-      <main>
+      <main className="body-wrapper">
         <button
           onClick={() => this.setState({ grid: !this.state.grid})}
           className={this.state.grid ? "btn btn-primary" : "btn"}>Grid view</button>

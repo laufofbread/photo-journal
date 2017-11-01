@@ -1,3 +1,8 @@
+@keyframes loading {
+  from {  left: -200%  }
+  to { left: 200% }
+}
+
 @import "normalize",
         "variables",
         "components",

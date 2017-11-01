@@ -7,8 +7,18 @@ ul {
   padding: 0;
 }
 
+img {
+  width: 100%;
+}
+
+.body-wrapper {
+  max-width:  1080px;
+  margin: 0 auto;
+  padding:  1rem;
+}
+
 .btn {
-  background: $santas-grey;
+  background: $jumbo;
   border: 0;
   border-radius: .2rem;
   color: $white;
@@ -18,7 +28,7 @@ ul {
   font-size:  1rem;
 
   &:hover {
-    background: darken($santas-grey, 5%);
+    background: darken($jumbo, 5%);
   }
 
   &.btn-primary {
@@ -100,58 +110,11 @@ ul {
 }
 
 .gallery {
-  padding: 1rem;
-}
+  padding: 1rem 0;
 
-@keyframes loading {
-  from {  left: -200%  }
-  to { left: 200% }
-}
-
-.gallery-image-holder {
-  display: block;
-  width: 100%;
-  position: relative;
-  height: 0;
-  padding: 56.25% 0 0 0;
-  overflow: hidden;
-  background-color: $sun-pearl;
-
-  &::before {
-    content: '';
-    position: absolute;
-    width:  100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    opacity:  0;
-    transition: all .5s ease-in-out;
-  }
-
-  &.loading {
-    &::before {
-      opacity:  1;
-      background: linear-gradient(-65deg, transparent 25%, $santas-grey 50%, transparent 75%);
-      animation: loading 2.5s ease-in-out infinite;
-    }
-  }
-
-  img {
-    display: block;
-    position: absolute;
-    max-width: 100%;
-    max-height: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    opacity: 1;
-    transition: opacity 1s ease-in-out;
-
-    &.loading {
-      opacity: 0;
+  &.full-view {
+    .gallery-item:not(:last-child) {
+      margin-bottom: 1rem;
     }
   }
 }
