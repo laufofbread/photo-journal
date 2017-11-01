@@ -6,7 +6,8 @@ class GalleryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: ""
+      src: "",
+      loading: true
     };
   }
   componentDidMount() {
@@ -16,12 +17,17 @@ class GalleryItem extends React.Component {
       this.setState({src: url});
     });
   }
+  handleImageLoaded() {
+    this.setState({ loading: false });
+  }
   render () {
     let date = format(new Date(this.props.item.date), "Do MMMM YYYY");
     return (
       <figure className="gallery-item">
-        <div className="gallery-image-holder">
-          <img src={this.state.src} />
+        <div className={this.state.loading ? "gallery-image-holder loading" : "gallery-image-holder"}>
+          <img className={this.state.loading ? "loading" : ""}
+               onLoad={this.handleImageLoaded.bind(this)}
+               src={this.state.src} />
         </div>
         <figcaption className="caption">{this.props.item.title}, {this.props.item.filter} - {date}</figcaption>
       </figure>
@@ -34,7 +40,7 @@ class Gallery extends React.Component {
     super();
     this.state = {
       items: [],
-      view: "full-view"
+      grid: true
     };
   }
   componentDidMount() {
@@ -65,9 +71,10 @@ class Gallery extends React.Component {
     });
     return (
       <main>
-        <button onClick={() => this.setState({ view: "grid-view"})} className="btn btn-primary">Grid view</button>
-        <button onClick={() => this.setState({ view: "full-view"})} className="btn btn-primary">Full view</button>
-        <section className={"gallery "+ this.state.view}>
+        <button
+          onClick={() => this.setState({ grid: !this.state.grid})}
+          className={this.state.grid ? "btn btn-primary" : "btn"}>Grid view</button>
+        <section className={this.state.grid ? "gallery grid-view" : "gallery full-view"}>
           {items}
         </section>
       </main>
