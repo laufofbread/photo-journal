@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
 import {
-  HashRouter as Router,
+  Router,
   Route
 } from 'react-router-dom'
 
 import Authenticate from './Authenticate';
 import Gallery from './Gallery';
 
+const history = createBrowserHistory();
+
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    <Router>
+    <Router history={history}>
       <div>
         <Route exact path="/" component={Gallery} />
         <Route path="/upload" component={Authenticate} />

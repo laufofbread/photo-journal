@@ -22,12 +22,7 @@ class GalleryItem extends React.Component {
     this.setState({ loading: false });
   }
   clickItem() {
-    this.props.clickItem();
-    //
-    // let offset = ReactDOM.findDOMNode(this.refs[this.props.item.id]).getBoundingClientRect().y;
-    // console.log(ReactDOM.findDOMNode(this.refs[this.props.item.id]).getBoundingClientRect());
-    // document.body.scrollTo(0, offset);
-    location.href = "#"+ this.props.item.id;
+    this.props.clickItem(this.props.item.id);
   }
   render () {
     let date = format(new Date(this.props.item.date), "Do MMMM YYYY");
@@ -51,7 +46,8 @@ class Gallery extends React.Component {
     super();
     this.state = {
       items: [],
-      grid: true
+      grid: true,
+      stateChange: false
     };
     this.clickItem = this.clickItem.bind(this);
   }
@@ -74,8 +70,11 @@ class Gallery extends React.Component {
       });
     });
   };
-  clickItem() {
-    this.setState({ grid: false });
+  clickItem(id) {
+    console.log(id);
+    this.setState({ grid: false }, () => {
+      location.href = "#"+ id;
+    });
   }
   render () {
     let items = this.state.items.map((item) => {
