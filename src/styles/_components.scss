@@ -1,3 +1,11 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -113,8 +121,24 @@ img {
   padding: 1rem 0;
 
   &.full-view {
-    .gallery-item:not(:last-child) {
-      margin-bottom: 1rem;
+    .gallery-item {
+      padding: .5rem 0;
+
+      @media (min-width: 650px) and (max-width: 1023px) {
+        padding: 1.5rem 0;
+      }
+
+      @media (min-width: 1023px) {
+        padding: 3rem 0;
+      }
+    }
+
+    .gallery-item:first-child {
+      padding-top: 0;
+    }
+
+    .gallery-item:last-child {
+      padding-bottom: 0;
     }
   }
 }
