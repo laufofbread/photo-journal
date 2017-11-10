@@ -14,6 +14,7 @@ app.use(webpackDevMiddleware(compiler, {
     colors: true,
   },
   historyApiFallback: true,
+  contentBase: "./"
 }));
 
 app.use(express.static(__dirname + '/www'));

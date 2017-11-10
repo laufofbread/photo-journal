@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import {
   Router,
-  Route
+  Route,
+  Link
 } from 'react-router-dom'
 
 import Authenticate from './Authenticate';
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div>
         <Route exact path="/" component={Gallery} />
         <Route path="/upload" component={Authenticate} />
+        <Link to="/upload">Upload</Link>
       </div>
     </Router>,
     document.getElementById('mount')

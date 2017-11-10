@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "description": "Lightweight photo journal creator",
   "main": "src/index.js",
+  "homepage": "https://laufofbread.github.io/photo-journal",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "compile": "webpack",
     "build": "webpack -p",
-    "start": "node server.js"
+    "start": "node server.js",
   },
   "keywords": [
     "react",
