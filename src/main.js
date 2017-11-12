@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <div>
         <Route exact path="/" component={Gallery} />
         <Route path="/upload" component={Authenticate} />
-        <Link to="/upload">Upload</Link>
       </div>
     </Router>,
     document.getElementById('mount')

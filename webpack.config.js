@@ -7,7 +7,7 @@ module.exports = {
     './styles/app.scss'
   ],
   output: {
-    path: path.join(__dirname, 'www'),
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
   },
   module: {
