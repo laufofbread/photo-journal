@@ -7,9 +7,7 @@
   "scripts": {
     "compile": "webpack",
     "build": "webpack -p",
-    "start": "node server.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "start": "node server.js"
   },
   "keywords": [
     "react",
@@ -33,7 +31,6 @@
     "date-fns": "^1.29.0",
     "express": "^4.15.3",
     "firebase": "^4.6.0",
-    "gh-pages": "^1.0.0",
     "history": "^4.7.2",
     "node-sass": "^4.6.0",
     "react": "^15.6.1",
