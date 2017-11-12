@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import {
   Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 
 import Authenticate from './Authenticate';

@@ -2,6 +2,7 @@ import React from 'react';
 import firebase, { auth, provider } from './firebase.js';
 import UploadForm from './UploadForm';
 import EditRemoveList from './EditRemove';
+import {Link} from 'react-router-dom';
 
 class Authenticate extends React.Component {
   constructor() {
@@ -41,6 +42,7 @@ class Authenticate extends React.Component {
       : <button className="btn" onClick={this.login}>Log in</button>;
     return (
       <main className="authentication-main">
+        <Link to="/">Go to gallery</Link>
         {button}
         {this.state.user ?
           <section className="upload-form-wrapper">
