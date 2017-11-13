@@ -14,9 +14,8 @@ class Gallery extends React.Component {
     this.clickItem = this.clickItem.bind(this);
   }
   componentDidMount() {
-    let newState = getDatabaseItems();
-    this.setState({
-      items: newState
+    getDatabaseItems().then(dbItems => {
+      this.setState({ items: dbItems });
     });
   };
   clickItem(id) {

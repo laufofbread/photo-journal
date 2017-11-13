@@ -8,9 +8,8 @@ class EditRemoveList extends React.Component {
     this.state = { items: [] };
   }
   componentDidMount() {
-    let newState = getDatabaseItems();
-    this.setState({
-      items: newState
+    getDatabaseItems().then(dbItems => {
+      this.setState({ items: dbItems });
     });
   };
   render() {
