@@ -88,15 +88,17 @@ class Gallery extends React.Component {
     return (
       <main className="body-wrapper">
 
+
+
+        <section className={this.state.grid ? "gallery grid-view" : "gallery full-view"}>
+          {items}
+        </section>
+
         <section className="gallery-btns">
           <Link to="upload">+</Link>
           <button
             onClick={() => this.setState({ grid: !this.state.grid})}
             className={this.state.grid ? "btn btn-primary" : "btn"}>Grid view</button>
-        </section>
-
-        <section className={this.state.grid ? "gallery grid-view" : "gallery full-view"}>
-          {items}
         </section>
 
       </main>

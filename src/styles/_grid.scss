@@ -1,8 +1,12 @@
 .grid-view {
   &.gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
+
+    @media (min-width: $breakpoint-sm) {
+      grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    }
   }
 
   .gallery-image-holder {

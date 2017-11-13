@@ -8,6 +8,11 @@ html {
 
 body {
   font-family: Helvetica, Arial, sans-serif;
+  font-size:  .8rem;
+
+  @media (min-width: $breakpoint-sm) {
+    font-size:  1rem;
+  }
 }
 
 a {
@@ -26,9 +31,9 @@ img {
 }
 
 .body-wrapper {
-  max-width:  1080px;
   margin: 0 auto;
-  padding:  1rem;
+  padding: 0 1rem;
+
 }
 
 .btn {
@@ -36,10 +41,10 @@ img {
   border: 0;
   border-radius: .2rem;
   color: $white;
-  padding:  .5rem 1rem;
+  padding:  .5em .9em;
   appearance: none;
   transition: all .2s linear;
-  font-size:  1rem;
+  font-size:  .8em;
 
   &:hover {
     background: darken($jumbo, 5%);
@@ -92,7 +97,7 @@ img {
   button {
     display: block;
     width:  100%;
-    font-size:  1.2rem;
+    font-size:  1.2em;
     padding:  .7rem;
   }
 }
@@ -151,7 +156,7 @@ img {
 
 .caption {
   text-align: right;
-  font-size: .9rem;
+  font-size: .9em;
   color: $jumbo;
   font-style: italic;
   margin: .2rem;
@@ -159,4 +164,23 @@ img {
 
 .gallery-item {
   margin: 0;
+}
+
+.gallery-btns {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: $white;
+  z-index: 10;
+  padding:  .5rem 1rem;
+  box-shadow: 0px -4px 5px 0px rgba($jumbo, .3);
+
+  .btn {
+    float: right;
+  }
+
+  a {
+    font-size:  1.5em;
+  }
 }

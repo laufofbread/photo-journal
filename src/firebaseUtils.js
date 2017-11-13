@@ -3,10 +3,9 @@ import firebase from "./firebase";
 export function getDatabaseItems() {
   const itemsRef = firebase.database().ref('items');
 
+  let newState = [];
   itemsRef.on('value', (snapshot) => {
     let items = snapshot.val();
-    let newState = [];
-
     for (let item in items) {
       newState.push({
         id: item,
@@ -16,7 +15,7 @@ export function getDatabaseItems() {
         date: items[item].date
       });
     }
-  }
+  });
 
   return newState.reverse();
-};
+}

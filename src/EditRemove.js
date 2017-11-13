@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from './firebase.js';
-import {getDatabaseItems} from "./firbaseUtils.js";
+import {getDatabaseItems} from "./firebaseUtils.js";
 
 class ImageListItem extends React.Component {
     constructor(props) {
