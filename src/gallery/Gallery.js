@@ -6,12 +6,14 @@ import GalleryItem from './GalleryItem.js';
 class Gallery extends React.Component {
   constructor() {
     super();
+    this.hash = location.hash;
     this.state = {
       items: [],
-      grid: location.hash.length ? false : true,
+      grid: this.hash.length ? false : true,
       stateChange: false
     };
     this.clickItem = this.clickItem.bind(this);
+    console.log(this.hash);
   }
   componentDidMount() {
     getDatabaseItems().then(dbItems => {
