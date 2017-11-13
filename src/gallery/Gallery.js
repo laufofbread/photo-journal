@@ -8,7 +8,7 @@ class Gallery extends React.Component {
     super();
     this.state = {
       items: [],
-      grid: true,
+      grid: location.hash.length ? false : true,
       stateChange: false
     };
     this.clickItem = this.clickItem.bind(this);

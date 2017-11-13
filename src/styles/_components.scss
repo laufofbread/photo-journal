@@ -129,7 +129,7 @@ img {
 }
 
 .gallery {
-  padding: 1rem 0;
+  padding: 0 0 3rem;
 
   &.full-view {
     .gallery-item {
@@ -140,16 +140,8 @@ img {
       }
 
       @media (min-width: 1023px) {
-        padding: 3rem 0;
+        padding: 2rem 0;
       }
-    }
-
-    .gallery-item:first-child {
-      padding-top: 0;
-    }
-
-    .gallery-item:last-child {
-      padding-bottom: 0;
     }
   }
 }
