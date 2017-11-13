@@ -9,6 +9,26 @@ const config = {
 };
 firebase.initializeApp(config);
 
+export function getDatabaseItems() {
+  const itemsRef = firebase.database().ref('items');
+
+  itemsRef.on('value', (snapshot) => {
+    let items = snapshot.val();
+    let newState = [];
+    for (let item in items) {
+      newState.push({
+        id: item,
+        image: items[item].image,
+        title: items[item].title,
+        filter: items[item].filter,
+        date: items[item].date
+      });
+    }
+    console.log(newState);
+    return newState.reverse();
+  });
+}
+
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
 export default firebase;

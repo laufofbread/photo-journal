@@ -1,6 +1,5 @@
 import React from 'react';
-import firebase from './firebase.js';
-import {getDatabaseItems} from "./firebaseUtils.js";
+import firebase from '../firebase.js';
 
 class ImageListItem extends React.Component {
     constructor(props) {
@@ -32,28 +31,4 @@ class ImageListItem extends React.Component {
     }
 }
 
-class EditRemoveList extends React.Component {
-  constructor() {
-    super();
-    this.state = { items: [] };
-  }
-  componentDidMount() {
-    let newState = getDatabaseItems();
-    this.setState({
-      items: newState
-    });
-  };
-  render() {
-      let items = this.state.items.map((item) => {
-          return (
-              <ImageListItem key={item.id} item={item} removeItem={this.removeItem} />
-          )
-      });
-      return (
-          <ul className="edit-form-list">
-              {items}
-          </ul>
-      );
-  }
-}
-export default EditRemoveList;
+export default ImageListItem;

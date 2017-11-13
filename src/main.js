@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import Authenticate from './Authenticate';
-import Gallery from './Gallery';
+import Gallery from './gallery/Gallery';
 
 const history = createBrowserHistory();
 

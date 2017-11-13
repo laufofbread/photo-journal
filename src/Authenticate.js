@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase, { auth, provider } from './firebase.js';
-import UploadForm from './UploadForm';
-import EditRemoveList from './EditRemove';
+import UploadForm from './upload-form/UploadForm';
+import EditRemoveList from './upload-form/EditRemove';
 import {Link} from 'react-router-dom';
 
 class Authenticate extends React.Component {

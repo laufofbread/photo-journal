@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase, { auth, provider } from './firebase.js';
+import firebase, { auth, provider } from '../firebase.js';
 
 class UploadForm extends React.Component {
   constructor() {
