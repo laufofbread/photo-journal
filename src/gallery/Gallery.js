@@ -31,9 +31,7 @@ class Gallery extends React.Component {
     });
   }
   changeView() {
-    this.setState({ grid: !this.state.grid}, () => {
-      if (this.state.grid) { removeHash() }
-    });
+    this.setState({ grid: !this.state.grid});
   }
   render () {
     let items = this.state.items.map((item) => {
