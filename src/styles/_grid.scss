@@ -16,7 +16,7 @@
     width: 100%;
     position: relative;
     height: 0;
-    padding: 56.25% 0 0 0;
+    padding-top: (3 / 4) * 100%;
     overflow: hidden;
     background-color: $sun-pearl;
 
@@ -62,4 +62,27 @@
 .full-view {
   max-width: 900px;
   margin: auto;
+
+  .loading {
+    display: block;
+    width: 100%;
+    position: relative;
+    height: 0;
+    padding-top: (3 / 4) * 100%;
+    overflow: hidden;
+    background-color: $sun-pearl;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      transition: all .5s ease-in-out;
+      background: linear-gradient(-65deg, transparent 25%, $santas-grey 50%, transparent 75%);
+      animation: loading 2.5s ease-in-out infinite;
+    }
+  }
 }

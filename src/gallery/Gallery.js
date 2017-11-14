@@ -1,7 +1,9 @@
 import React from 'react';
-import firebase, { auth, provider, getDatabaseItems } from '../firebase.js';
+import firebase, { getDatabaseItems } from '../firebase.js';
+import {format} from 'date-fns';
 import {Link} from 'react-router-dom';
 import GalleryItem from './GalleryItem.js';
+import { goToAnchor, removeHash } from 'react-scrollable-anchor';
 
 class Gallery extends React.Component {
   constructor() {
@@ -9,7 +11,7 @@ class Gallery extends React.Component {
     this.hash = location.hash;
     this.state = {
       items: [],
-      grid: this.hash.length ? false : true,
+      grid: !this.hash.length,
       stateChange: false
     };
     this.clickItem = this.clickItem.bind(this);
@@ -25,20 +27,23 @@ class Gallery extends React.Component {
   };
   clickItem(id) {
     this.setState({ grid: false }, () => {
-      location.href = "#"+ id;
+      goToAnchor(id, true);
     });
   }
   changeView() {
     this.setState({ grid: !this.state.grid}, () => {
-      if (this.state.grid) { location.hash = ""; }
+      if (this.state.grid) { removeHash() }
     });
   }
   render () {
     let items = this.state.items.map((item) => {
+      let date = format(new Date(item.date), "YYYY-MM-DD");
+      let id = `${item.title.replace(/\s+/g, '_')}-${date}`;
       return (
         <GalleryItem key={item.id}
                      item={item}
-                     clickItem={this.clickItem} />
+                     clickItem={this.clickItem}
+                     id={id}/>
       )
     });
     return (

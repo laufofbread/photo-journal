@@ -3,7 +3,7 @@ import firebase from '../firebase.js';
 import {format} from 'date-fns';
 import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor'
 
-configureAnchors({scrollDuration: 0});
+configureAnchors({offset: 2, scrollDuration: 0, keepLastAnchorHash: true});
 
 class GalleryItem extends React.Component {
   constructor(props) {
@@ -24,12 +24,12 @@ class GalleryItem extends React.Component {
     this.setState({ loading: false });
   }
   clickItem() {
-    this.props.clickItem(this.props.item.id);
+    this.props.clickItem(this.props.id);
   }
   render () {
     let date = format(new Date(this.props.item.date), "Do MMMM YYYY");
     return (
-      <ScrollableAnchor id={this.props.item.id}>
+      <ScrollableAnchor id={this.props.id}>
         <figure onClick={this.clickItem}
                 className="gallery-item">
           <div className={this.state.loading ? "gallery-image-holder loading" : "gallery-image-holder"}>
