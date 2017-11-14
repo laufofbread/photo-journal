@@ -9,15 +9,10 @@ class EditRemoveList extends React.Component {
     this.addMoreItems = this.addMoreItems.bind(this);
   }
   componentDidMount() {
-    let dbItemsRef = firebase.database().ref('items').limitToLast(5);
-    dbItemsRef.on('value', (snapshot) => {
-      getDatabaseItems(snapshot).then(dbItems => {
-        this.setState({ items: dbItems });
-      });
-    });
+    this.addMoreItems();
   };
   addMoreItems() {
-    let itemCount = this.state.items.length;
+    let itemCount = this.state.items.length || 0;
     let dbItemsRef = firebase.database().ref('items').limitToLast(itemCount + 5);
     dbItemsRef.on('value', (snapshot) => {
       getDatabaseItems(snapshot).then(dbItems => {

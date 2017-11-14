@@ -8,7 +8,7 @@ html {
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size:  .8rem;
+  font-size:  .9rem;
 
   @media (min-width: $breakpoint-sm) {
     font-size:  1rem;
@@ -44,7 +44,7 @@ img {
   padding:  .5em .9em;
   appearance: none;
   transition: all .2s linear;
-  font-size:  .8em;
+  font-size:  .9em;
 
   &:hover {
     background: darken($jumbo, 5%);

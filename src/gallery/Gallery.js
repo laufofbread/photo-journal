@@ -14,18 +14,23 @@ class Gallery extends React.Component {
       filters: [],
       currentFilter: "all",
       grid: !this.hash.length,
-      stateChange: false
+      stateChange: false,
+      filteredItems: []
     };
     this.clickItem = this.clickItem.bind(this);
     this.changeView = this.changeView.bind(this);
     this.changeFilter = this.changefilter.bind(this);
+    this.filterItems = this.filterItems.bind(this);
   }
   componentDidMount() {
     const dbItemsRef = firebase.database().ref('items');
     dbItemsRef.on('value', (snapshot) => {
       getDatabaseItems(snapshot).then(dbItems => {
         const filters = getFilters(dbItems);
-        this.setState({ items: dbItems, filters: filters });
+        this.setState({
+          items: dbItems,
+          filteredItems: dbItems,
+          filters: filters });
       });
     });
   };
@@ -35,15 +40,26 @@ class Gallery extends React.Component {
     });
   }
   changeView() {
-    this.setState({ grid: !this.state.grid}, () => {
-      if(this.state.grid) goToTop();
+    this.setState({ grid: !this.state.grid});
+  }
+  changefilter(event) {
+    let filteredItems = this.filterItems(event.target.value);
+    this.setState({
+      currentFilter: event.target.value,
+      filteredItems: filteredItems
     });
   }
-  changefilter(filter) {
-
+  filterItems(filter) {
+    if(filter != "all") {
+      return this.state.items.filter(item => {
+        return item.filter === filter;
+      });
+    } else {
+      return this.state.items;
+    }
   }
   render () {
-    let items = this.state.items.map(item => {
+    let items = this.state.filteredItems.map(item => {
       let date = format(new Date(item.date), "YYYY-MM-DD");
       let id = `${item.title.replace(/\s+/g, '_')}-${date}`;
       return (
@@ -64,11 +80,13 @@ class Gallery extends React.Component {
 
         <section className="gallery-btns">
           <Link to="upload">+</Link>
+
           <label>Filter by country:</label>
           <select value={this.state.currentFilter} onChange={this.changeFilter}>
             <option value="all">All</option>
             {options}
           </select>
+
           <button
             onClick={this.changeView}
             className="btn btn-primary">{this.state.grid ? "List view" : "Grid view"}</button>
