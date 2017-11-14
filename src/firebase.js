@@ -32,6 +32,10 @@ export function getDatabaseItems(snapshot) {
   });
 }
 
+export function getFilters(items) {
+  return [...new Set(items.map(item => item.filter))];
+}
+
 export const provider = new firebase.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
 export default firebase;

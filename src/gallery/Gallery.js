@@ -1,9 +1,9 @@
 import React from 'react';
-import firebase, { getDatabaseItems } from '../firebase.js';
+import firebase, { getDatabaseItems, getFilters } from '../firebase.js';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import GalleryItem from './GalleryItem.js';
-import { goToAnchor } from 'react-scrollable-anchor';
+import { goToAnchor, goToTop } from 'react-scrollable-anchor';
 
 class Gallery extends React.Component {
   constructor() {
@@ -24,7 +24,7 @@ class Gallery extends React.Component {
     const dbItemsRef = firebase.database().ref('items');
     dbItemsRef.on('value', (snapshot) => {
       getDatabaseItems(snapshot).then(dbItems => {
-        const filters = [...new Set(dbItems.map(item => item.filter))];
+        const filters = getFilters(dbItems);
         this.setState({ items: dbItems, filters: filters });
       });
     });
@@ -35,7 +35,9 @@ class Gallery extends React.Component {
     });
   }
   changeView() {
-    this.setState({ grid: !this.state.grid});
+    this.setState({ grid: !this.state.grid}, () => {
+      if(this.state.grid) goToTop();
+    });
   }
   changefilter(filter) {
 
