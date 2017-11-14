@@ -81,8 +81,12 @@ class Gallery extends React.Component {
         <section className="gallery-btns">
           <Link to="upload">+</Link>
 
-          <label>Filter by country:</label>
-          <select value={this.state.currentFilter} onChange={this.changeFilter}>
+          <label className="filter-label" htmlFor="country">Filter by country:</label>
+          <select className="filter-select"
+                  id="country"
+                  name="country"
+                  value={this.state.currentFilter}
+                  onChange={this.changeFilter}>
             <option value="all">All</option>
             {options}
           </select>

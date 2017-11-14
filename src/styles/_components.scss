@@ -176,3 +176,21 @@ img {
     font-size:  1.5em;
   }
 }
+
+.filter-label {
+  font-size:  .9em;
+  color: $salt-box;
+  margin: 0 .3em 0 1em;
+}
+
+.filter-select {
+  -webkit-appearance: none;
+   -moz-appearance:   none;
+   appearance:        none;
+   border:  none;
+   background: none;
+   padding: .2em;
+   color: $salt-box;
+   outline: none;
+   cursor: pointer;
+}
