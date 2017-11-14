@@ -3,7 +3,9 @@ import firebase, { getDatabaseItems, getFilters } from '../firebase.js';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import GalleryItem from './GalleryItem.js';
-import { goToAnchor, goToTop } from 'react-scrollable-anchor';
+import { goToAnchor, goToTop, removeHash, configureAnchors } from 'react-scrollable-anchor';
+
+configureAnchors({offset: 2, scrollDuration: 0, keepLastAnchorHash: true});
 
 class Gallery extends React.Component {
   constructor() {
@@ -40,7 +42,10 @@ class Gallery extends React.Component {
     });
   }
   changeView() {
-    this.setState({ grid: !this.state.grid});
+    this.setState({ grid: !this.state.grid}, () => {
+      goToTop();
+      removeHash();
+    });
   }
   changefilter(event) {
     let filteredItems = this.filterItems(event.target.value);

@@ -1,9 +1,7 @@
 import React from 'react';
 import firebase from '../firebase.js';
 import {format} from 'date-fns';
-import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor'
-
-configureAnchors({offset: 2, scrollDuration: 0, keepLastAnchorHash: true});
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 class GalleryItem extends React.Component {
   constructor(props) {
