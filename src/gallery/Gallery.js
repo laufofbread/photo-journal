@@ -13,16 +13,24 @@ class Gallery extends React.Component {
       stateChange: false
     };
     this.clickItem = this.clickItem.bind(this);
-    console.log(this.hash);
+    this.changeView = this.changeView.bind(this);
   }
   componentDidMount() {
-    getDatabaseItems().then(dbItems => {
-      this.setState({ items: dbItems });
+    const dbItemsRef = firebase.database().ref('items');
+    dbItemsRef.on('value', (snapshot) => {
+      getDatabaseItems(snapshot).then(dbItems => {
+        this.setState({ items: dbItems });
+      });
     });
   };
   clickItem(id) {
     this.setState({ grid: false }, () => {
       location.href = "#"+ id;
+    });
+  }
+  changeView() {
+    this.setState({ grid: !this.state.grid}, () => {
+      if (this.state.grid) { location.hash = ""; }
     });
   }
   render () {
@@ -42,8 +50,8 @@ class Gallery extends React.Component {
         <section className="gallery-btns">
           <Link to="upload">+</Link>
           <button
-            onClick={() => this.setState({ grid: !this.state.grid})}
-            className={this.state.grid ? "btn btn-primary" : "btn"}>Grid view</button>
+            onClick={this.changeView}
+            className="btn btn-primary">{this.state.grid ? "List view" : "Grid view"}</button>
         </section>
 
       </main>

@@ -9,33 +9,27 @@ const config = {
 };
 firebase.initializeApp(config);
 
-export function getDatabaseItems() {
-  const itemsRef = firebase.database().ref('items');
-
+export function getDatabaseItems(snapshot) {
   return new Promise((resolve, reject) => {
-    itemsRef.on('value', (snapshot) => {
-      let newState = [];
-      let items = snapshot.val();
-      for (let item in items) {
-        newState.push({
-          id: item,
-          image: items[item].image,
-          title: items[item].title,
-          filter: items[item].filter,
-          date: items[item].date
-        });
-      }
-      newState.reverse();
+    let newState = [];
+    let items = snapshot.val();
+    for (let item in items) {
+      newState.push({
+        id: item,
+        image: items[item].image,
+        title: items[item].title,
+        filter: items[item].filter,
+        date: items[item].date
+      });
+    }
+    newState.reverse();
 
-      if(newState.length) {
-        resolve(newState);
-      } else {
-        reject("No items returned");
-      }
-    });
+    if(newState.length) {
+      resolve(newState);
+    } else {
+      reject("There are no items to display.");
+    }
   });
-
-
 }
 
 export const provider = new firebase.auth.GoogleAuthProvider();
