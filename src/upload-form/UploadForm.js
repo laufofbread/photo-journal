@@ -1,5 +1,6 @@
 import React from 'react';
-import firebase, { auth, provider } from '../firebase.js';
+import firebase, { auth, provider, getFilters, getDatabaseItems } from '../firebase.js';
+import Autocomplete from 'react-autocomplete';
 
 class UploadForm extends React.Component {
   constructor() {
@@ -9,13 +10,23 @@ class UploadForm extends React.Component {
       title: "",
       filter: "",
       date: "",
-      file: ""
+      file: "",
+      filters: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    const dbItemsRef = firebase.database().ref('items');
+    dbItemsRef.on('value', (snapshot) => {
+      getDatabaseItems(snapshot).then(dbItems => {
+        const filters = getFilters(dbItems);
+        this.setState({ filters: filters });
+      });
+    });
+  };
   handleChange(e) {
-      if(e.target.name === "image") {this.state.file = e.target.files[0];}
+      if(e.target.name === "image") this.state.file = e.target.files[0];
       this.setState({[e.target.name]: e.target.value});
   }
   handleSubmit(e) {
@@ -56,7 +67,16 @@ class UploadForm extends React.Component {
         <input type="text" name="title" value={this.state.title} onChange={this.handleChange} required />
 
         <label>Filter:</label>
-        <input type="text" name="filter" value={this.state.filter} onChange={this.handleChange} required />
+        <Autocomplete getItemValue={(item) => item}
+                      items={this.state.filters}
+                      renderItem={(item, isHighlighted) =>
+                        <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                          {item}
+                        </div>
+                      }
+                      name="filter"
+                      value={this.state.filter}
+                      onChange={this.handleChange} required />
 
         <button type="submit" className="btn btn-primary">Upload</button>
       </form>
