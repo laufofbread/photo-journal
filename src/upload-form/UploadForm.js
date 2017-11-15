@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase, { auth, provider, getFilters, getDatabaseItems } from '../firebase.js';
+import firebase, { getFilters, getDatabaseItems } from '../firebase.js';
 import Autocomplete from 'react-autocomplete';
 
 class UploadForm extends React.Component {
@@ -60,23 +60,26 @@ class UploadForm extends React.Component {
   render() {
     return (
       <form className="upload-form" onSubmit={this.handleSubmit}>
-        <label>Choose image:</label>
+        <label htmlFor="image">Choose image:</label>
         <input type="file" name="image" value={this.state.image} onChange={this.handleChange} required />
 
-        <label>Title:</label>
+        <label htmlFor="title">Title:</label>
         <input type="text" name="title" value={this.state.title} onChange={this.handleChange} required />
 
-        <label>Filter:</label>
+        <label htmlFor="filter">Filter:</label>
         <Autocomplete getItemValue={(item) => item}
                       items={this.state.filters}
                       renderItem={(item, isHighlighted) =>
-                        <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                        <div className="filter-suggestion" style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
                           {item}
                         </div>
                       }
-                      name="filter"
                       value={this.state.filter}
-                      onChange={this.handleChange} required />
+                      onChange={e => this.setState({ filter: e.target.value })}
+                      onSelect={val => this.setState({ filter: val })}
+                      wrapperStyle={{display: 'block'}}
+                      ref="filterField"
+                      required />
 
         <button type="submit" className="btn btn-primary">Upload</button>
       </form>
