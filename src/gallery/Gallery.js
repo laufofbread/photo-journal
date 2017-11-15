@@ -84,7 +84,7 @@ class Gallery extends React.Component {
         </section>
 
         <section className="gallery-btns">
-          <Link to="upload">+</Link>
+          <Link className="upload-link" to="upload">+</Link>
 
           <label className="filter-label" htmlFor="country">Filter by country:</label>
           <select className="filter-select"

@@ -104,6 +104,13 @@ img {
   }
 }
 
+.upload-link {
+  font-size:  1.5em;
+  padding-right:  .5em;
+  border-right: 1px solid $sun-pearl;
+  color: $sun-pearl;
+}
+
 .edit-form-list-item {
   border-bottom:  1px dotted $jumbo;
 }
@@ -173,10 +180,6 @@ img {
 
   .btn {
     float: right;
-  }
-
-  a {
-    font-size:  1.5em;
   }
 }
 
