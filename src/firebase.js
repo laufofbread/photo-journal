@@ -1,11 +1,12 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
+import env from '../env.js';
 const config = {
-    apiKey: "AIzaSyBFQbcZOMr2P4Z_UZtQcJhMPCls0dMLEp4",
-    authDomain: "photo-journal-d92af.firebaseapp.com",
-    databaseURL: "https://photo-journal-d92af.firebaseio.com",
-    projectId: "photo-journal-d92af",
-    storageBucket: "photo-journal-d92af.appspot.com",
-    messagingSenderId: "309179033953"
+    apiKey: env.apiKey,
+    authDomain: env.authDomain,
+    databaseURL: env.databaseURL,
+    projectId: env.projectId,
+    storageBucket: env.storageBucket,
+    messagingSenderId: env.messagingSenderId
 };
 firebase.initializeApp(config);
 

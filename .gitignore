@@ -1,6 +1,6 @@
 node_modules
 .DS_Store
-www/bundle.js
 .idea
 .editorconfig
 build
+env.js
