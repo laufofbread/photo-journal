@@ -8,7 +8,8 @@ class Authenticate extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      error: null
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -27,6 +28,7 @@ class Authenticate extends React.Component {
         const user = result.user;
         authRef.child(user.uid).once("value", snapshot => {
           if(snapshot.val()) { this.setState({ user }); }
+          else { this.setState({ error: "You do not have permission to log in." }); }
         });
       });
   }
@@ -45,6 +47,7 @@ class Authenticate extends React.Component {
       <main className="authentication-main">
         <Link to="/">Go to gallery</Link>
         {button}
+        {this.state.error ? <p>{this.state.error}</p> : ""}
         {this.state.user ?
           <section className="upload-form-wrapper">
             <UploadForm/>
