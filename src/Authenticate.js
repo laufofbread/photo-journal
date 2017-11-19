@@ -21,11 +21,12 @@ class Authenticate extends React.Component {
     });
   }
   login() {
+    const authRef = firebase.database().ref('allowedUids');
     auth.signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
-        this.setState({
-          user
+        authRef.child(user.uid).once("value", snapshot => {
+          if(snapshot.val()) { this.setState({ user }); }
         });
       });
   }
