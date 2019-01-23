@@ -9,6 +9,7 @@ html {
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size:  .9rem;
+  color: $salt-box;
 
   @media (min-width: $breakpoint-sm) {
     font-size:  1rem;
@@ -17,8 +18,11 @@ body {
 
 a {
   text-decoration: none;
-  color: $jumbo;
-  font-size: .8em;
+  color: $salt-box;
+
+  &:hover {
+    color: $pumpkin;
+  }
 }
 
 ul {
@@ -33,23 +37,21 @@ img {
 .nav {
   margin: 1rem;
   text-align: center;
-
-  a {
-    &:hover {
-      color: $pumpkin;
-    }
-  }
 }
 
 .logo {
   font-size: 1.5em;
-  color: $salt-box;
   font-family: 'Merriweather', Helvetica, Arial, sans-serif;
   box-shadow: inset 0 -2px 0 $pumpkin;
 }
 
 .nav-link {
   margin-top: .5rem;
+  font-size: .8em;
+
+  a {
+    color: $jumbo;
+  }
 }
 
 .body-wrapper {
@@ -218,4 +220,12 @@ img {
 .filter-suggestion {
   padding:  .5em;
   font-size:  1.1em;
+}
+
+.text-block {
+  max-width: 40em;
+  margin: 3em auto;
+
+  font-family: 'Merriweather', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
 }
