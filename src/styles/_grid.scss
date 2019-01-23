@@ -39,7 +39,7 @@
     &.loading {
       &::before {
         opacity:  1;
-        background: linear-gradient(-65deg, transparent 25%, $santas-grey 50%, transparent 75%);
+        background: linear-gradient(-65deg, $sun-pearl 25%, $santas-grey 50%, $sun-pearl 75%);
         animation: loading 2.5s ease-in-out infinite;
       }
     }
