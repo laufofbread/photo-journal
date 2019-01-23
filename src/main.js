@@ -17,10 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
     <Router history={history}>
       <div>
-        <nav>
-          <Link to="/">A Lauf Adventure</Link>
-          <Link to="/about">About</Link>
-        </nav>
+        <ul className="nav">
+          <li>
+            <Link className="logo" to="/">A Lauf Adventure</Link>
+          </li>
+          <li className="nav-link">
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
 
         <Route exact path="/" component={Gallery} />
         <Route path="/upload" component={Authenticate} />
