@@ -51,6 +51,10 @@ img {
 
   a {
     color: $jumbo;
+
+    &:hover {
+      color: $pumpkin;
+    }
   }
 }
 
@@ -201,8 +205,6 @@ img {
 
 .filter-label {
   font-size:  .9em;
-  color: $salt-box;
-  margin: 0 .3em 0 1em;
 }
 
 .filter-select {
