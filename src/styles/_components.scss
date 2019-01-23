@@ -125,13 +125,6 @@ img {
   }
 }
 
-.upload-link {
-  font-size:  1.5em;
-  padding-right:  .5em;
-  border-right: 1px solid $sun-pearl;
-  color: $sun-pearl;
-}
-
 .edit-form-list-item {
   border-bottom:  1px dotted $jumbo;
 }
@@ -216,7 +209,7 @@ img {
    appearance:        none;
    border:  none;
    background: none;
-   padding: .2em;
+   padding: .4em;
    color: $salt-box;
    outline: none;
    cursor: pointer;

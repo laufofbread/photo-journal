@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase, { getDatabaseItems, getFilters } from '../firebase.js';
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
 import GalleryItem from './GalleryItem.js';
 import { goToAnchor, goToTop, removeHash, configureAnchors } from 'react-scrollable-anchor';
 
@@ -84,8 +83,6 @@ class Gallery extends React.Component {
         </section>
 
         <section className="gallery-btns">
-          <Link className="upload-link" to="upload">+</Link>
-
           <label className="filter-label" htmlFor="country">Filter by country:</label>
           <select className="filter-select"
                   id="country"
