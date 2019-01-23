@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import {
   Router,
-  Route
-} from 'react-router-dom'
+  Route,
+  Link
+} from 'react-router-dom';
 
 import Authenticate from './Authenticate';
 import Gallery from './gallery/Gallery';
+import About from './about/About';
 
 const history = createBrowserHistory();
 
@@ -15,8 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
     <Router history={history}>
       <div>
+        <nav>
+          <Link to="/">A Lauf Adventure</Link>
+          <Link to="/about">About</Link>
+        </nav>
+
         <Route exact path="/" component={Gallery} />
         <Route path="/upload" component={Authenticate} />
+        <Route path="/about" component={About} />
       </div>
     </Router>,
     document.getElementById('mount')
